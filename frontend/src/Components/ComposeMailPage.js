@@ -37,11 +37,13 @@ function ComposeMailPage(props) {
                 props.isDisabled(false)
                 window.alert("Email sent successfully")
             } else {
+                window.alert("failed to send mail")
                 updateSts(false);
                 props.isDisabled(false)
             }
 
         }).catch((e) => {
+                            window.alert("failed to send mail")
             updateSts(false);
             props.isDisabled(false)
             console.log("catch error");

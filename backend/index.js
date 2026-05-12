@@ -5,9 +5,11 @@ const cors = require('cors');
 app.use(cors({ origin: 'https://your-react-app.vercel.app' })); // We will get this URL in Phase 3
 app.use(express.json());
 const nodemailer = require('nodemailer');
-app.listen("4010", ()=>{
-        console.log("server connected");
-})
+
+const PORT = process.env.PORT || 4010;
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
 
 const mongoose = require("mongoose")
 mongoose.connect("mongodb+srv://manikandan:1234@mani.hhwqfi4.mongodb.net/mailDB?appName=mani").then(()=>{
