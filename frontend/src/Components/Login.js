@@ -28,8 +28,8 @@ if(email === 'admin' && password === "1234"){
           <div className="input-group">
             <label>Email Address</label>
             <input 
-              type="email" 
-              placeholder="you@example.com"
+              type="text"
+              placeholder="Enter Username"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required 
@@ -40,7 +40,7 @@ if(email === 'admin' && password === "1234"){
             <label>App Password</label>
             <input 
               type="password" 
-              placeholder="16-digit Nodemailer password"
+              placeholder="Enter Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required 
