@@ -1,7 +1,11 @@
 const express = require('express')
 const app = express();
 const cors = require("cors");
-app.use(cors({ origin: 'https://your-react-app.vercel.app' })); // We will get this URL in Phase 3
+app.use(cors({
+    origin: "https://bulk-mail-project-ochre.vercel.app",
+    methods: ["POST", "GET"],
+    credentials: true
+}));
 app.use(express.json());
 const nodemailer = require('nodemailer');
 
