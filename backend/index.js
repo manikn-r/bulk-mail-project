@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express();
 const cors = require("cors");
+const { Resend } = require('resend');
 
 // 1. Initialize CORS so Vercel can talk to Render
 app.use(cors({
@@ -45,29 +46,39 @@ app.post("/bulkMail",(req,res)=>{
         
     }));
     
-    
-    let toMailArr = reqBody.recipient.split(",")
-    const transport = nodemailer.createTransport({
-         service:"gmail",
-    auth:{
-        user:"manikandan.ramachandran01@gmail.com",
-        pass:"upuk sfhc jcja osnx"
-    }
-    })
+    // Initialize Resend with your secret key
+        const resend = new Resend(process.env.RESEND_API_KEY);
+                let toMailArr = reqBody.recipient.split(",")
     new Promise(async function(resolve, reject){
 
     try{
-        for(let mail of toMailArr){
+        // for(let mail of toMailArr){
         
-            const mailOptions={
-                from: "manikandan.ramachandran01@gmail.com",
-                to:mail,
-                subject:reqBody.sub,
-                text: reqBody.body
-            }
-            await transport.sendMail(mailOptions) 
-            console.log("mail send to "+ mail);
+        //     const mailOptions={
+        //         from: "manikandan.ramachandran01@gmail.com",
+        //         to:mail,
+        //         subject:reqBody.sub,
+        //         text: reqBody.body
+        //     }
+        //     await transport.sendMail(mailOptions) 
+        //     console.log("mail send to "+ mail);
             
+        // }
+        for (let mail of toMailArr) {
+            // Send the email via Resend's API
+            const { data, error } = await resend.emails.send({
+                // NOTE: If you don't have a verified domain, this MUST be 'onboarding@resend.dev'
+                from: 'manikandan.ramachandran01@gmail.com', 
+                to: mail.trim(),
+                subject: reqBody.sub,
+                text: reqBody.body
+            });
+
+            if (error) {
+                console.error("Resend failed for", mail, error);
+            } else {
+                console.log("Mail sent to", mail, "ID:", data.id);
+            }
         }
         // res.send("success")
             model.create({
