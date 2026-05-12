@@ -2,7 +2,8 @@ const express = require('express')
 const app = express();
 const cors = require("cors");
 app.use(cors({
-    origin: "https://bulk-mail-project-ochre.vercel.app",
+    origin: ["https://bulk-mail-project-ochre.vercel.app", 
+        "https://bulk-mail-project-pyvr.vercel.app"],
     methods: ["POST", "GET"],
     credentials: true
 }));
