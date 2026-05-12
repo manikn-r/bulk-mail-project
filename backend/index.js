@@ -31,8 +31,10 @@ const model = mongoose.model("model", {
 }, "bulkEmailPro")
 
 app.get("/sentHistory",(req,res)=>{
-    model.find({senderEmail: req.query.user}).then( (data)=>{
+    model.find().then( (data)=>{
         res.send(data);
+    }).catch( (e)=>{
+        res.send("from catch "+e)
     })
 })
 app.post("/bulkMail",(req,res)=>{
@@ -78,13 +80,13 @@ app.post("/bulkMail",(req,res)=>{
         console.log('out of for loop');
     }
     catch(error){
-        reject("failed")
+        reject(error)
 console.log("catch error details:", error.message);
         
     }
 }).then(()=>{
     res.send("success")
-}).catch(()=>{
-    res.send("failed")
+}).catch((e)=>{
+    res.send("from catch2 " + e)
 })
 })
