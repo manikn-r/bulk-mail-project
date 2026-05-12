@@ -48,7 +48,7 @@ app.post("/bulkMail",(req,res)=>{
     
     // Initialize Resend with your secret key
         const resend = new Resend(process.env.RESEND_API_KEY);
-                let toMailArr = reqBody.recipient.split(",")
+        let toMailArr = reqBody.recipient.split(",")
     new Promise(async function(resolve, reject){
 
     try{

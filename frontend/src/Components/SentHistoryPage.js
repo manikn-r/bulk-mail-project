@@ -4,7 +4,7 @@ import axios from "axios";
 function SentHistoryPage(props){
     const [emailHistory, updateEmailHistory] = useState([])
     useEffect(()=>{
-let url = axios.get("https://bulk-mail-project-2-adu5.onrender.com/sentHistory?user="+props.userObj.email);
+let url = axios.get("https://bulk-mail-project-1-3kwh.onrender.com/sentHistory?user="+props.userObj.email);
 // http://localhost:4010/sentHistory?user=
 url.then((res)=>{
 console.log(res);
