@@ -29,7 +29,7 @@ function ComposeMailPage(props) {
             userEmail: props.userObj.email,
             userPass: props.userObj.password
         }
-        let url = axios.post("https://bulk-mail-project-2-adu5.onrender.com", payload)
+        let url = axios.post("https://bulk-mail-project-2-adu5.onrender.com//bulkMail", payload)
         // http://localhost:4010/bulkMail
         url.then((res) => {
             if (res.data === "success") {
