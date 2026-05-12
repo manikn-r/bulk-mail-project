@@ -10,9 +10,15 @@ function Login(probs){
     e.preventDefault(); // Stops the page from refreshing
 probs.setEmail(email)
 probs.setPass(password)
-probs.isDisabled(false)
-setSelectedLink("Compose Mail")
-probs.renderSelLink("Compose Mail");
+if(email == 'admin' && password == "1234"){
+  probs.isDisabled(false)
+  setSelectedLink("Compose Mail")
+  probs.renderSelLink("Compose Mail");
+
+}else{
+  window.alert("Invalid credentials");
+  return;
+}
 
   };
     return (<>

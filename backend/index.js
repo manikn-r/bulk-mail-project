@@ -1,13 +1,11 @@
 const express = require('express')
 const app = express();
 const cors = require("cors");
+
+// 1. Initialize CORS so Vercel can talk to Render
 app.use(cors({
-    origin: ["https://bulk-mail-project-ochre.vercel.app", 
-        "https://bulk-mail-project-pyvr.vercel.app",
-    "https://bulk-mail-project-6vlm.vercel.app/"
-],
-    methods: ["POST", "GET"],
-    credentials: true
+    origin: "*", // Allows any frontend to connect. Change to your Vercel URL later for strict security.
+    methods: ["GET", "POST"]
 }));
 app.use(express.json());
 const nodemailer = require('nodemailer');
@@ -50,8 +48,8 @@ app.post("/bulkMail",(req,res)=>{
     const transport = nodemailer.createTransport({
          service:"gmail",
     auth:{
-        user:reqBody.userEmail,
-        pass:reqBody.userPass
+        user:"manikandan.ramachandran01@gmail.com",
+        pass:"upuk sfhc jcja osnx"
     }
     })
     new Promise(async function(resolve, reject){
@@ -60,7 +58,7 @@ app.post("/bulkMail",(req,res)=>{
         for(let mail of toMailArr){
         
             const mailOptions={
-                from: reqBody.userEmail,
+                from: "manikandan.ramachandran01@gmail.com",
                 to:mail,
                 subject:reqBody.sub,
                 text: reqBody.body
@@ -71,7 +69,7 @@ app.post("/bulkMail",(req,res)=>{
         }
         // res.send("success")
             model.create({
-                senderEmail: reqBody.userEmail,
+                senderEmail: "manikandan.ramachandran01@gmail.com",
                 date:new Date(),
                 subject:reqBody.sub,
                 recipients:reqBody.recipient
